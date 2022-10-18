@@ -1,6 +1,8 @@
 package servlet.produto;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,9 +34,16 @@ public class ProdutoDelete extends HttpServlet {
 		vo.setCodigo(codigo);
 		ProdutoDAO dao = new ProdutoDAO(vo);
 		dao.deleteProduto();
-		String ret="Produto Excluido Com Sucesso<br>";
-		ret+="<a href='ProdutoList'>Voltar</a>";
-		response.getWriter().append(ret);
+		PrintWriter out = response.getWriter(); 
+		 out.println("<html>");
+	        out.println("<head>");
+	        out.println("<title>Produto excluido</title>");
+	        out.println("</head>");
+	        out.println("<body>");
+	        out.println("<h1>Produto excluido Com Sucesso</h1><br/>");
+	        out.println("<a href='ProdutoList'>Voltar</a>");  
+	        out.println("</body>"); 
+	        out.println("</html>");
 	}
 
 	/**

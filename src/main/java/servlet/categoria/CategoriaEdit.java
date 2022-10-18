@@ -1,10 +1,14 @@
 package servlet.categoria;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import DAO.CategoriaDAO;
+import VO.Categoria;
 
 /**
  * Servlet implementation class CategoriaEdit
@@ -25,7 +29,13 @@ public class CategoriaEdit extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int codigo = Integer.parseInt(request.getParameter("id"));
+		Categoria cat = new Categoria();
+		cat.setCodigo(codigo);
+		CategoriaDAO catdao = new CategoriaDAO();
+		catdao.createCategoria(cat);
+		request.setAttribute("categoria", catdao.getVo());
+		request.getRequestDispatcher("/categoria/Categoria.jsp").forward(request, response);
 	}
 
 	/**

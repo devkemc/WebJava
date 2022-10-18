@@ -6,7 +6,7 @@ public class Produto {
 	private String nome;
 	private String descricao;
 	private float preco;
-	private Categoria categoria;
+	private String categoria;
 	
 	public int getCodigo() {
 		return codigo;
@@ -33,14 +33,11 @@ public class Produto {
 	public void setPreco(float preco) {
 		this.preco = preco;
 	}
-	public Categoria getCategoria() {
-		return categoria;
+	public String getCategoria() {
+		return this.categoria;
 	}
-	public void setCategoria(Categoria categoria) {
-		this.categoria = new Categoria();
-		this.categoria.setNome(categoria.getNome());
-		this.categoria.setDescricao(categoria.getDescricao());
-		this.categoria.setCodigo(categoria.getCodigo());
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 	
 }

@@ -46,8 +46,8 @@
               <td><c:out value="${item.email}"/></td>
               <td><c:out value="${item.telefone}"/></td>
               <td><c:out value="${item.endereco}"/></td>
-              <td><a href="ProdutoDelete?id=<c:out value="${item.codigo}" />">Deletar</a></td>
-              <td><a href="ProdutoEdit?id=<c:out value="${item.codigo}" />">Editar</a></td>
+              <td><a href="ClienteDelete?id=<c:out value="${item.codigo}" />">Deletar</a></td>
+              <td><a href="ClienteEdit?id=<c:out value="${item.codigo}" />">Editar</a></td>
             </tr>
         </c:forEach>
         </tbody>

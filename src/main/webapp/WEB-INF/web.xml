@@ -5,12 +5,6 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-  	<servlet-name>Cadastro</servlet-name>
-  	<display-name>Cadastro</display-name>
-  	<description></description>
-  	<servlet-class>servlet.Cadastro</servlet-class>
-  </servlet>
-  <servlet>
   	<servlet-name>Index</servlet-name>
   	<display-name>Index</display-name>
   	<description></description>
@@ -106,6 +100,66 @@
   	<description></description>
   	<servlet-class>servlet.categoria.CategoriaDelete</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>EntregaDelete</servlet-name>
+  	<display-name>EntregaDelete</display-name>
+  	<description></description>
+  	<servlet-class>servlet.entrega.EntregaDelete</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>EntregaEdit</servlet-name>
+  	<display-name>EntregaEdit</display-name>
+  	<description></description>
+  	<servlet-class>servlet.entrega.EntregaEdit</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>EntregaList</servlet-name>
+  	<display-name>EntregaList</display-name>
+  	<description></description>
+  	<servlet-class>servlet.entrega.EntregaList</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>EntregaSave</servlet-name>
+  	<display-name>EntregaSave</display-name>
+  	<description></description>
+  	<servlet-class>servlet.entrega.EntregaSave</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>EntregaNew</servlet-name>
+  	<display-name>EntregaNew</display-name>
+  	<description></description>
+  	<servlet-class>servlet.entrega.EntregaNew</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>VendaNew</servlet-name>
+  	<display-name>VendaNew</display-name>
+  	<description></description>
+  	<servlet-class>servlet.venda.VendaNew</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>VendaSave</servlet-name>
+  	<display-name>VendaSave</display-name>
+  	<description></description>
+  	<servlet-class>servlet.venda.VendaSave</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>VendaEdit</servlet-name>
+  	<display-name>VendaEdit</display-name>
+  	<description></description>
+  	<servlet-class>servlet.venda.VendaEdit</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>VendaDelete</servlet-name>
+  	<display-name>VendaDelete</display-name>
+  	<description></description>
+  	<servlet-class>servlet.venda.VendaDelete</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>VendaList</servlet-name>
+  	<display-name>VendaList</display-name>
+  	<description></description>
+  	<servlet-class>servlet.venda.VendaList</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Index</servlet-name>
   	<url-pattern>/Index</url-pattern>
@@ -169,6 +223,46 @@
   <servlet-mapping>
   	<servlet-name>CategoriaDelete</servlet-name>
   	<url-pattern>/CategoriaDelete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EntregaDelete</servlet-name>
+  	<url-pattern>/EntregaDelete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EntregaEdit</servlet-name>
+  	<url-pattern>/EntregaEdit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EntregaList</servlet-name>
+  	<url-pattern>/EntregaList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EntregaSave</servlet-name>
+  	<url-pattern>/EntregaSave</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EntregaNew</servlet-name>
+  	<url-pattern>/EntregaNew</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VendaNew</servlet-name>
+  	<url-pattern>/VendaNew</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VendaSave</servlet-name>
+  	<url-pattern>/VendaSave</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VendaEdit</servlet-name>
+  	<url-pattern>/VendaEdit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VendaDelete</servlet-name>
+  	<url-pattern>/VendaDelete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VendaList</servlet-name>
+  	<url-pattern>/VendaList</url-pattern>
   </servlet-mapping>
   
 </web-app>

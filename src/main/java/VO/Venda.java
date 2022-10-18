@@ -1,13 +1,11 @@
 package VO;
 
-import java.util.Date;
-
 public class Venda {
 	
 	private int codigo;
-	private Date data;
-	private Cliente cliente;
-	private Produto produto;
+	private String data;
+	private String cliente;
+	private String produto;
 	private int quantidade;
 	private float desconto;
 	private float valorTotal;
@@ -18,22 +16,23 @@ public class Venda {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-	public Date getData() {
+	
+	public String getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
-	public Cliente getCliente() {
+	public String getCliente() {
 		return cliente;
 	}
-	public void setCliente(Cliente cliente) {
+	public void setCliente(String cliente) {
 		this.cliente = cliente;
 	}
-	public Produto getProduto() {
+	public String getProduto() {
 		return produto;
 	}
-	public void setProduto(Produto produto) {
+	public void setProduto(String produto) {
 		this.produto = produto;
 	}
 	public int getQuantidade() {

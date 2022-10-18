@@ -36,6 +36,7 @@
             <th scope="col">Nome</th>
             <th scope="col">Descrição</th>
             <th scope="col">Preço</th>
+            <th scope="col">Categoria</th>
           </tr>
         </thead>
         <tbody>
@@ -45,6 +46,7 @@
               <td><c:out value="${item.nome}"/></td>
               <td><c:out value="${item.descricao}"/></td>
               <td><c:out value="${item.preco}"/></td>
+              <td><c:out value="${item.categoria}"/></td>
               <td><a href="ProdutoDelete?id=<c:out value="${item.codigo}" />">Deletar</a></td>
               <td><a href="ProdutoEdit?id=<c:out value="${item.codigo}" />">Editar</a></td>
             </tr>

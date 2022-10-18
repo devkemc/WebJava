@@ -31,7 +31,7 @@ public CategoriaDAO() {
 		this.vo = voCategoria;
 	}
 
-	public void createCliente(Categoria c) {
+	public void createCategoria(Categoria c) {
 		this.vo.setCodigo(0);
 		this.vo.setNome(c.getNome());	
 		this.vo.setDescricao(c.getDescricao());	
@@ -55,7 +55,7 @@ public CategoriaDAO() {
 		
 		return lst;
 	}
-	public void deleteCliente() {
+	public void deleteCategoria() {
 			
 	}
 

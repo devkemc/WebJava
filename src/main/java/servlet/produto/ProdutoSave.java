@@ -42,8 +42,7 @@ public class ProdutoSave extends HttpServlet {
 		p.setCodigo(0);
 		p.setNome(request.getParameter("nome"));
 		p.setDescricao(request.getParameter("descricao"));
-		p.setPreco(Float.parseFloat(request.getParameter("preco")));
-		System.out.println(p.getCodigo() + p.getDescricao() + p.getPreco() + p.getNome());
+		p.setPreco(Float.parseFloat(request.getParameter("preco")));;
 		
 		dao.createProduct(p);
 		

@@ -34,6 +34,7 @@ public class ProdutoDAO {
 		this.vo.setDescricao(p.getDescricao());
 		this.vo.setNome(p.getNome());	
 		this.vo.setPreco(p.getPreco());
+		this.vo.setCategoria(p.getCategoria());
 		this.vo.setCodigo(0);
 		this.listaProduto.add(vo);
 		
@@ -43,14 +44,16 @@ public class ProdutoDAO {
 		List<Produto> lst = new ArrayList<Produto>();
 		Produto p = new Produto();
 		p.setCodigo(12);
-		p.setNome("Computador");
+		p.setNome("Positivo i7");
 		p.setDescricao("Produto teste 01234");
+		p.setCategoria("computadores");
 		lst.add(p);
 		
 		Produto p2 = new Produto();
 		p2.setCodigo(13);
-		p2.setNome("Notebook");
+		p2.setNome("Acer i7");
 		p2.setDescricao("Notebook barato");
+		p2.setCategoria("Notebooks");
 		lst.add(p2);
 		return lst;
 	}

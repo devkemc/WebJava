@@ -29,6 +29,13 @@
 	</td>
 	</tr>
 	<tr>
+	<td>Categoria</td><td>
+	<input type="text" id="categoria" name="categoria"
+	value="<c:out value="${categoria.preco}"/>" /> 
+	
+	</td>
+	</tr>
+	<tr>
 		<td><button type="submit" value="Gravar">Gravar</button>
 			<button type="submit" value="limpar">Limpar</button>
 			<a href="ProdutoList">Voltar</a>

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.CategoriaDAO;
-import VO.Categoria;
 
 /**
  * Servlet implementation class CategoriaList
