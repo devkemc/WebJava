@@ -2,12 +2,14 @@ package servlet.produto;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.GenericDAO;
 import DAO.ProdutoDAO;
 import VO.Produto;
 
@@ -38,14 +40,24 @@ public class ProdutoSave extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Produto p = new Produto();
-		ProdutoDAO dao = new ProdutoDAO();
-		p.setCodigo(0);
 		p.setNome(request.getParameter("nome"));
 		p.setDescricao(request.getParameter("descricao"));
-		p.setPreco(Float.parseFloat(request.getParameter("preco")));;
-		
-		dao.createProduct(p);
-		
+		p.setPreco(Float.parseFloat(request.getParameter("preco")));
+		p.setCategoria(request.getParameter("categoria"));
+
+
+		try {
+			GenericDAO<Produto> produtoDao = new GenericDAO<>();
+			produtoDao.create(p);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+
+
 		PrintWriter out = response.getWriter(); 
 		 out.println("<html>");
 	        out.println("<head>");

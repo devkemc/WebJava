@@ -1,11 +1,23 @@
 package VO;
 
+import anotations.*;
+
+@Entity
+@Table(name = "produto")
 public class Produto {
-	
+	@Id
 	private int codigo;
+	@Column
+	@NotNull
 	private String nome;
+	@Column
+	@NotNull
 	private String descricao;
-	private float preco;
+	@Column
+	@NotNull
+	private double preco;
+	@Column
+	@NotNull
 	private String categoria;
 	
 	public int getCodigo() {
@@ -27,10 +39,10 @@ public class Produto {
 		this.descricao = descricao;
 	}
 	
-	public float getPreco() {
+	public double getPreco() {
 		return preco;
 	}
-	public void setPreco(float preco) {
+	public void setPreco(double preco) {
 		this.preco = preco;
 	}
 	public String getCategoria() {

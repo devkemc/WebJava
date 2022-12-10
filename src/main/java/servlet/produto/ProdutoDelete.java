@@ -2,12 +2,14 @@ package servlet.produto;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.GenericDAO;
 import DAO.ProdutoDAO;
 import VO.Produto;
 
@@ -30,10 +32,16 @@ public class ProdutoDelete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int codigo = Integer.parseInt(request.getParameter("id"));
-		Produto vo = new Produto();
-		vo.setCodigo(codigo);
-		ProdutoDAO dao = new ProdutoDAO(vo);
-		dao.deleteProduto();
+		Produto p = new Produto();
+		p.setCodigo(codigo);
+		try {
+			GenericDAO<Produto> dao = new GenericDAO<>();
+			dao.delete(p);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException | IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
 		PrintWriter out = response.getWriter(); 
 		 out.println("<html>");
 	        out.println("<head>");

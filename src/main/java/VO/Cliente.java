@@ -1,11 +1,23 @@
 package VO;
 
+import anotations.*;
+
+@Entity
+@Table(name ="clientes")
 public class Cliente {
-	
+	@Id
 	private int codigo;
+	@NotNull
+	@Column
 	private String nome;
+	@NotNull
+	@Column
 	private String email;
+	@NotNull
+	@Column
 	private String telefone;
+	@NotNull
+	@Column
 	private String endereco;
 	
 	public int getCodigo() {
