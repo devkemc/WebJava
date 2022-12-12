@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.CategoriaDAO;
+
+import DAO.GenericDAO;
 import VO.Categoria;
 
 /**
@@ -29,12 +30,7 @@ public class CategoriaEdit extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int codigo = Integer.parseInt(request.getParameter("id"));
-		Categoria cat = new Categoria();
-		cat.setCodigo(codigo);
-		CategoriaDAO catdao = new CategoriaDAO();
-		catdao.createCategoria(cat);
-		request.setAttribute("categoria", catdao.getVo());
+
 		request.getRequestDispatcher("/categoria/Categoria.jsp").forward(request, response);
 	}
 

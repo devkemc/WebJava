@@ -50,7 +50,7 @@ public class GenericDAO<T> {
                 if(atributo.getType().getSimpleName().equals("String")) {
                     instrucaoSQL += " VARCHAR(255)";
                 } else if(atributo.getType().getSimpleName().equals("int") || atributo.getType().getSimpleName().equals("Integer")) {
-                    instrucaoSQL += " INTEGER";
+                    instrucaoSQL += " INTEGER ";
                 } else if(atributo.getType().getSimpleName().equalsIgnoreCase("double")) {
                     instrucaoSQL += " REAL ";
                 }
@@ -187,6 +187,48 @@ public class GenericDAO<T> {
         }
         return listaRetorno;
     }
+    public void update(T objeto)
+            throws IllegalArgumentException,
+            IllegalAccessException,
+            SQLException {
+
+        if(!ePersistido(objeto)) {
+            throw new IllegalArgumentException("A classe deste objeto não é uma entidade!");
+        }
+
+        criarTabelaSeNaoExistir(objeto);
+
+        String instrucaoSQL = "UPDATE " + getNomeTabela(objeto) + " SET ";
+
+        Field[] atributos = objeto.getClass().getDeclaredFields();
+        for(Field atributo: atributos) {
+            if(eId(atributo) || !ePersistido(atributo)) {
+                continue;
+            }
+            instrucaoSQL += getNomeColuna(atributo) + "=?, ";
+        }
+
+        instrucaoSQL = instrucaoSQL.substring(0, instrucaoSQL.length() - 2);
+
+        Field id = getId(objeto);
+        instrucaoSQL += " WHERE " + getNomeColuna(id) + "=?";
+
+        PreparedStatement sql = con.prepareStatement(instrucaoSQL);
+        int numeroInterrogacao = 1;
+        for(Field atributo: atributos) {
+            if(eId(atributo) || !ePersistido(atributo)) {
+                continue;
+            }
+
+            atributo.setAccessible(true);
+            sql.setObject(numeroInterrogacao++, atributo.get(objeto));
+            atributo.setAccessible(false);
+        }
+        id.setAccessible(true);
+        sql.setObject(numeroInterrogacao, id.get(objeto));
+        id.setAccessible(false);
+        sql.execute();
+    }
     public void delete(T objeto)
             throws IllegalArgumentException,
             IllegalAccessException,
@@ -208,6 +250,68 @@ public class GenericDAO<T> {
         sql.setObject(1, id.get(objeto));
         id.setAccessible(false);
         sql.execute();
+    }
+    public T getOne(T objeto)
+            throws IllegalArgumentException,
+            IllegalAccessException,
+            SQLException,
+            InstantiationException,
+            InvocationTargetException,
+            NoSuchMethodException,
+            SecurityException {
+
+        if(!ePersistido(objeto)) {
+            throw new IllegalArgumentException("A classe deste objeto n�o � uma entidade!");
+        }
+
+        criarTabelaSeNaoExistir(objeto);
+
+        String instrucaoSQL = "SELECT ";
+
+        Field[] atributos = objeto.getClass().getDeclaredFields();
+        for(Field atributo: atributos) {
+            if(!ePersistido(atributo)) {
+                continue;
+            }
+            instrucaoSQL += getNomeColuna(atributo) + ", ";
+        }
+
+        instrucaoSQL = instrucaoSQL.substring(0, instrucaoSQL.length() - 2);
+        instrucaoSQL += " FROM " + getNomeTabela(objeto);
+        Field id = getId(objeto);
+        instrucaoSQL += " WHERE " + getNomeColuna(id) + "=?";
+
+        PreparedStatement sql = con.prepareStatement(instrucaoSQL);
+
+        id.setAccessible(true);
+        sql.setObject(1, id.get(objeto));
+        id.setAccessible(false);
+        ResultSet resultado = sql.executeQuery();
+        if(resultado.next()) {
+
+            T retorno = (T) objeto.getClass().getConstructor().newInstance();
+            for(Field atributo: atributos) {
+                if(!ePersistido(atributo)) {
+                    continue;
+                }
+
+                atributo.setAccessible(true);
+                if(atributo.getType().getSimpleName().equals("String")) {
+                    atributo.set(retorno, resultado.getString(getNomeColuna(atributo)));
+                } else if(atributo.getType().getSimpleName().equals("int") || atributo.getType().getSimpleName().equals("Integer")) {
+                    atributo.set(retorno, resultado.getInt(getNomeColuna(atributo)));
+                } else if(atributo.getType().getSimpleName().equalsIgnoreCase("long")) {
+                    atributo.set(retorno, resultado.getLong(getNomeColuna(atributo)));
+                } else if(atributo.getType().getSimpleName().equalsIgnoreCase("double")) {
+                    atributo.set(retorno, resultado.getDouble(getNomeColuna(atributo)));
+                }
+                atributo.setAccessible(false);
+            }
+
+            return retorno;
+
+        }
+        return null;
     }
 
 }

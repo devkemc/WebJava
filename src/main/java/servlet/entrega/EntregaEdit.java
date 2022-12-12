@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.EntregaDAO;
 import VO.Entrega;
 
 /**
@@ -31,9 +30,6 @@ public class EntregaEdit extends HttpServlet {
 		int codigo = Integer.parseInt(request.getParameter("id"));
 		Entrega vo = new Entrega();
 		vo.setId(codigo);
-		EntregaDAO dao = new EntregaDAO();
-		dao.createEntrega(vo);
-		request.setAttribute("entrega", dao.getVo());
 		request.getRequestDispatcher("/entrega/Entrega.jsp").forward(request, response);
 	}
 

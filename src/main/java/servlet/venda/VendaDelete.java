@@ -2,13 +2,14 @@ package servlet.venda;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.VendaDAO;
+import DAO.GenericDAO;
 import VO.Venda;
 
 /**
@@ -30,10 +31,18 @@ public class VendaDelete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int codigo = Integer.parseInt(request.getParameter("id"));
-		Venda vo = new Venda();
-		vo.setCodigo(codigo);
-		VendaDAO dao = new VendaDAO();
-		dao.deleteVenda();
+		Venda v = new Venda();
+		v.setCodigo(codigo);
+		try {
+			GenericDAO<Venda> dao = new GenericDAO<>();
+			dao.delete(v);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
 		PrintWriter out = response.getWriter(); 
 		 out.println("<html>");
 	        out.println("<head>");

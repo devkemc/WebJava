@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.GenericDAO;
-import DAO.ProdutoDAO;
 import VO.Produto;
 
 /**

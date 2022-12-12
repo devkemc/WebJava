@@ -12,29 +12,33 @@
     <h1>Cadastro de Cliente</h1>
     <form id="formulario01" action="ClienteSave" method="post">
         <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="codigo">Codigo</label>
+                <input type="text" class="form-control" id="codigo" disabled name="codigo" value="<c:out value="${cliente.codigo}"/>">
+            </div>
           <div class="form-group col-md-6">
             <label for="inputNome">Nome</label>
-            <input type="text" class="form-control" id="inputNome" placeholder="Nome" value="<c:out value="${cliente.nome}"/>">
+            <input type="text" class="form-control" id="inputNome" name="nome" placeholder="Nome" value="<c:out value="${cliente.nome}"/>">
           </div>
           <div class="form-group col-md-6">
             <label for="inputEmail">Email</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<c:out value="${cliente.email}"/>">
+            <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="email" value="<c:out value="${cliente.email}"/>">
           </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputTelefone">Telefone</label>
-                <input type="text" class="form-control" id="inputTelefone" placeholder="(11) 91111-1111" value="<c:out value="${cliente.telefone}"/>">
+                <input type="text" class="form-control" id="inputTelefone" placeholder="(11) 91111-1111" name="telefone" value="<c:out value="${cliente.telefone}"/>">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputAddress">Endereço</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="Rua dos Bobos, nº 0" value="<c:out value="${cliente.endereco}"/>">
+                <input type="text" class="form-control" id="inputAddress" placeholder="Rua dos Bobos, nº 0" name="endereco" value="<c:out value="${cliente.endereco}"/>">
             </div>
         </div>
         <button type="submit" class="btn btn-success">Gravar</button>
         <button type="reset" class="btn btn-primary">Limpar</button>
         <a class="btn btn-danger" href="ClienteList">Voltar</a>
-      </form>
+    </form>
     
     </body>
 </html>

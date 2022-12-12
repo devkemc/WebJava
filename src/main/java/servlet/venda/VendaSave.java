@@ -2,13 +2,14 @@ package servlet.venda;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.VendaDAO;
+import DAO.GenericDAO;
 import VO.Venda;
 
 /**
@@ -38,17 +39,25 @@ public class VendaSave extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Venda v = new Venda();
-		VendaDAO dao = new VendaDAO();
 		v.setCodigo(0);
 		v.setCliente(request.getParameter("cliente"));
 		v.setData(request.getParameter("data"));
 		v.setProduto(request.getParameter("produto"));
-		v.setDesconto(10);
-		v.setQuantidade(0);
-		v.setValorTotal(15);
-		System.out.println(v);
-		dao.createVenda(v);
-		
+		v.setDesconto(Integer.parseInt(request.getParameter("desconto")));
+		v.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
+		v.setValorTotal(Integer.parseInt(request.getParameter("valorTotal")));
+		try {
+			GenericDAO<Venda> dao = new GenericDAO<>();
+			dao.create(v);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
+
+
 		PrintWriter out = response.getWriter(); 
 		 out.println("<html>");
 	        out.println("<head>");
