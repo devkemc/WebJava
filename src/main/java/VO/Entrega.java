@@ -1,10 +1,17 @@
 package VO;
 
+import anotations.*;
 
+@Entity
+@Table(name = "entrega")
 public class Entrega {
-	
+	@Id
 	private int id;
+	@Column
+	@NotNull
 	private String venda;
+	@Column
+	@NotNull
 	private String data;
 	
 	public String getVenda() {

@@ -2,13 +2,14 @@ package servlet.cliente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.ClienteDAO;
+import DAO.GenericDAO;
 import VO.Cliente;
 
 /**
@@ -30,10 +31,17 @@ public class ClienteDelete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int codigo = Integer.parseInt(request.getParameter("id"));
-		Cliente clientevo = new Cliente();
-		clientevo.setCodigo(codigo);
-		ClienteDAO dao = new ClienteDAO(clientevo);
-		dao.deleteCliente();
+		Cliente c = new Cliente();
+		c.setCodigo(codigo);
+		GenericDAO<Cliente> dao = null;
+		try {
+			dao = new GenericDAO<>();
+			dao.delete(c);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException | IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
 		PrintWriter out = response.getWriter(); 
 		 out.println("<html>");
 	        out.println("<head>");

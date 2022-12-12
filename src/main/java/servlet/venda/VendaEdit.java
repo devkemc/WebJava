@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.VendaDAO;
 import VO.Venda;
 
 /**
@@ -31,9 +30,7 @@ public class VendaEdit extends HttpServlet {
 		int codigo = Integer.parseInt(request.getParameter("id"));
 		Venda vo = new Venda();
 		vo.setCodigo(codigo);
-		VendaDAO dao = new VendaDAO();
-		dao.createVenda(vo);
-		request.setAttribute("venda", dao.getVo());
+
 		request.getRequestDispatcher("/venda/Venda.jsp").forward(request, response);
 	}
 

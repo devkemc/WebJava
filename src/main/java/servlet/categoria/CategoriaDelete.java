@@ -2,13 +2,14 @@ package servlet.categoria;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.CategoriaDAO;
+import DAO.GenericDAO;
 import VO.Categoria;
 
 /**
@@ -30,10 +31,18 @@ public class CategoriaDelete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int codigo = Integer.parseInt(request.getParameter("id"));
-		Categoria categoriavo = new Categoria();
-		categoriavo.setCodigo(codigo);
-		CategoriaDAO dao = new CategoriaDAO(categoriavo);
-		dao.deleteCategoria();
+		Categoria c = new Categoria();
+		c.setCodigo(codigo);
+		try {
+			GenericDAO<Categoria> dao = new GenericDAO<>();
+			dao.delete(c);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
 		PrintWriter out = response.getWriter(); 
 		 out.println("<html>");
 	        out.println("<head>");

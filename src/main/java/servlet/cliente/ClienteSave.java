@@ -2,13 +2,14 @@ package servlet.cliente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.ClienteDAO;
+import DAO.GenericDAO;
 import VO.Cliente;
 
 /**
@@ -37,27 +38,43 @@ public class ClienteSave extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String ret;
 		Cliente c = new Cliente();
-		ClienteDAO cdao = new ClienteDAO();
-		c.setCodigo(0);
+		String codigo = request.getParameter("codigo");
 		c.setNome(request.getParameter("nome"));
 		c.setEmail(request.getParameter("email"));
 		c.setTelefone(request.getParameter("telefone"));
 		c.setEndereco(request.getParameter("endereco"));
-		
-		cdao.createCliente(c);
-		
-		PrintWriter out = response.getWriter(); 
-		 out.println("<html>");
-	        out.println("<head>");
-	        out.println("<title>Cliente cadastrado</title>");
-	        out.println("</head>");
-	        out.println("<body>");
-	        out.println("<h1>Cliente cadastrado Com Sucesso</h1><br/>");
-	        out.println("<a href='ClienteList'>Voltar</a>");  
-	        out.println("</body>"); 
-	        out.println("</html>");
-	        
+		System.out.println(codigo);
+		try {
+			GenericDAO<Cliente> dao = new GenericDAO<>();
+			if (codigo == "" || codigo == null) {
+				ret = "Cliente Incluído com Sucesso";
+				dao.create(c);
+			} else {
+				ret = "Cliente Alterado com Sucesso";
+				c.setCodigo(Integer.parseInt(codigo));
+				dao.update(c);
+			}
+
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		} catch (ClassNotFoundException ex) {
+			throw new RuntimeException(ex);
+		} catch (IllegalAccessException ex) {
+			throw new RuntimeException(ex);
+		}
+
+		PrintWriter out = response.getWriter();
+		out.println("<html>");
+		out.println("<head>");
+		out.println("<title>Cliente cadastrado</title>");
+		out.println("</head>");
+		out.println("<body>");
+		out.println("<h1>" + ret + "</h1><br/>");
+		out.println("<a href='ClienteList'>Voltar</a>");
+		out.println("</body>");
+		out.println("</html>");
 	}
 
 }

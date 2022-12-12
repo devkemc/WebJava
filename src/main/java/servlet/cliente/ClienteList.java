@@ -1,13 +1,16 @@
 package servlet.cliente;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.ClienteDAO;
+import DAO.GenericDAO;
+import VO.Cliente;
 
 /**
  * Servlet implementation class ClienteList
@@ -27,8 +30,17 @@ public class ClienteList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ClienteDAO dao = new ClienteDAO();
-		request.setAttribute("lista", dao.getClientes());
+		Cliente c = new Cliente();
+		try {
+			GenericDAO<Cliente> dao = new GenericDAO<>();
+			request.setAttribute("lista", dao.getAll(c));
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException | IllegalAccessException | InstantiationException | InvocationTargetException |
+				 NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
+
 		request.getRequestDispatcher("/cliente/ClienteList.jsp").forward(request, response);
 	}
 

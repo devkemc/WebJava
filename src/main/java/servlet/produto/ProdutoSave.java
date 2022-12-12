@@ -10,15 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.GenericDAO;
-import DAO.ProdutoDAO;
 import VO.Produto;
 
 /**
  * Servlet implementation class ProdutoSave
  */
 public class ProdutoSave extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -27,49 +26,54 @@ public class ProdutoSave extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Produto p = new Produto();
-		p.setNome(request.getParameter("nome"));
-		p.setDescricao(request.getParameter("descricao"));
-		p.setPreco(Float.parseFloat(request.getParameter("preco")));
-		p.setCategoria(request.getParameter("categoria"));
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String ret;
+        Produto p = new Produto();
+        String codigo = request.getParameter("codigo");
+        p.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+        p.setNome(request.getParameter("nome"));
+        p.setDescricao(request.getParameter("descricao"));
+        p.setPreco(Float.parseFloat(request.getParameter("preco")));
+        p.setCategoria(request.getParameter("categoria"));
+        try {
+            GenericDAO<Produto> produtoDao = new GenericDAO<>();
+            if (codigo == "" || codigo == null) {
+                ret = "Produto Incluído com Sucesso";
+                produtoDao.create(p);
+            } else {
+                ret = "Produto Alterado com Sucesso";
+                p.setCodigo(Integer.parseInt(codigo));
+                produtoDao.update(p);
+            }
 
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } catch (ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
+        } catch (IllegalAccessException ex) {
+            throw new RuntimeException(ex);
+        }
 
-		try {
-			GenericDAO<Produto> produtoDao = new GenericDAO<>();
-			produtoDao.create(p);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-
-
-		PrintWriter out = response.getWriter(); 
-		 out.println("<html>");
-	        out.println("<head>");
-	        out.println("<title>Produto cadastrado</title>");
-	        out.println("</head>");
-	        out.println("<body>");
-	        out.println("<h1>Produto Incluido Com Sucesso</h1><br/>");
-	        out.println("<a href='ProdutoList'>Voltar</a>");  
-	        out.println("</body>"); 
-	        out.println("</html>");
-	        
-		
-	}
-
+        PrintWriter out = response.getWriter();
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Produto cadastrado</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>" + ret + "</h1><br/>");
+        out.println("<a href='ProdutoList'>Voltar</a>");
+        out.println("</body>");
+        out.println("</html>");
+    }
 }

@@ -2,13 +2,14 @@ package servlet.categoria;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.CategoriaDAO;
+import DAO.GenericDAO;
 import VO.Categoria;;
 
 /**
@@ -38,14 +39,22 @@ public class CategoriaSave extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Categoria c = new Categoria();
-		CategoriaDAO cdao = new CategoriaDAO();
 		c.setCodigo(0);
 		c.setNome("notebook");
 		c.setDescricao("notebook");
-		
-		
-		cdao.createCategoria(c);
-		
+
+		try {
+			GenericDAO<Categoria> dao = new GenericDAO<>();
+			dao.create(c);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
+
+
 		PrintWriter out = response.getWriter(); 
 		 out.println("<html>");
 	        out.println("<head>");

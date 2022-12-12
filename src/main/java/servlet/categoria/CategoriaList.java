@@ -1,13 +1,16 @@
 package servlet.categoria;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.CategoriaDAO;
+import DAO.GenericDAO;
+import VO.Categoria;
 
 /**
  * Servlet implementation class CategoriaList
@@ -28,8 +31,18 @@ public class CategoriaList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		CategoriaDAO dao = new CategoriaDAO();
-		request.setAttribute("lista", dao.getCategorias());
+		Categoria c = new Categoria();
+
+		try {
+			GenericDAO<Categoria>  dao = new GenericDAO<>();
+			request.setAttribute("lista", dao.getAll(c));
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException | IllegalAccessException | InstantiationException | InvocationTargetException |
+				 NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
+
 	 request.getRequestDispatcher("/categoria/CategoriaList.jsp").forward(request, response);
 	}
 

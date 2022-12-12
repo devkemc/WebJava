@@ -45,7 +45,7 @@
               <th scope="row"><c:out value="${item.codigo}" /></th>
               <td><c:out value="${item.nome}"/></td>
               <td><c:out value="${item.descricao}"/></td>
-              <td><c:out value="${item.preco}"/></td>
+              <td><c:out value="R$ ${item.preco}"/></td>
               <td><c:out value="${item.categoria}"/></td>
               <td><a href="ProdutoDelete?id=<c:out value="${item.codigo}" />">Deletar</a></td>
               <td><a href="ProdutoEdit?id=<c:out value="${item.codigo}" />">Editar</a></td>

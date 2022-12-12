@@ -1,14 +1,30 @@
 package VO;
 
+import anotations.*;
+
+@Entity
+@Table( name = "vendas")
 public class Venda {
-	
+	@Id
 	private int codigo;
+	@Column
+	@NotNull
 	private String data;
+	@Column
+	@NotNull
 	private String cliente;
+	@Column
+	@NotNull
 	private String produto;
+	@Column
+	@NotNull
 	private int quantidade;
-	private float desconto;
-	private float valorTotal;
+	@Column
+	@NotNull
+	private double desconto;
+	@Column
+	@NotNull
+	private double valorTotal;
 	
 	public int getCodigo() {
 		return codigo;
@@ -41,16 +57,16 @@ public class Venda {
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
-	public float getDesconto() {
+	public double getDesconto() {
 		return desconto;
 	}
-	public void setDesconto(float desconto) {
+	public void setDesconto(double desconto) {
 		this.desconto = desconto;
 	}
-	public float getValorTotal() {
+	public double getValorTotal() {
 		return valorTotal;
 	}
-	public void setValorTotal(float valorTotal) {
+	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
 	}	
 	
