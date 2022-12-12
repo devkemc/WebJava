@@ -14,31 +14,31 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputData">Data</label>
-            <input type="date" class="form-control" id="inputData" value="<c:out value="${venda.data}"/>">
+            <input type="date" class="form-control" id="inputData" name="data" value="<c:out value="${venda.data}"/>">
           </div>
           <div class="form-group col-md-6">
             <label for="inputCliente">Cliente</label>
-            <input type="text" class="form-control" id="inputCliente" placeholder="Cliente" value="<c:out value="${venda.cliente}"/>">
+            <input type="text" class="form-control" id="inputCliente" placeholder="Cliente" name="cliente" value="<c:out value="${venda.cliente}"/>">
           </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputProduto">Produto</label>
-                <input type="text" class="form-control" id="inputProduto" placeholder="notebook" value="<c:out value="${venda.produto}"/>">
+                <input type="text" class="form-control" id="inputProduto" placeholder="notebook" name="produto" value="<c:out value="${venda.produto}"/>">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputQuantidade">Quantidade</label>
-                <input type="text" class="form-control" id="inputQuantidade" placeholder="Quantidade" value="<c:out value="${venda.quantidade}"/>">
+                <input type="text" class="form-control" id="inputQuantidade" placeholder="Quantidade" name="quantidade" value="<c:out value="${venda.quantidade}"/>">
             </div>
         </div>
          <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputDesconto">Desconto</label>
-                <input type="text" class="form-control" id="inputDesconto" value="<c:out value="${venda.desconto}"/>">
+                <input type="text" class="form-control" id="inputDesconto" name="desconto" value="<c:out value="${venda.desconto}"/>">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputValorTotal">Valor Total</label>
-                <input type="text" class="form-control" id="inputValorTotal" placeholder="Quantidade" value="<c:out value="${venda.valorTotal}"/>">
+                <input type="text" class="form-control" id="inputValorTotal" placeholder="Total" name="valorTotal" value="<c:out value="${venda.valorTotal}"/>">
             </div>
         </div>
         <button type="submit" class="btn btn-success">Efetuar Venda</button>
