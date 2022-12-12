@@ -19,7 +19,7 @@
 	</td>
 	</tr>
 	<tr>
-	<td>data</td><td><input type="date" id="data" name="data" value="<c:out value="${produto.venda}"/>" /> </td>
+	<td>data</td><td><input type="date" id="data" name="data" value="<c:out value="${entrega.data}"/>" /> </td>
 	</tr>
 	<tr>
 		<td><button type="submit" value="Gravar">Gravar</button>
